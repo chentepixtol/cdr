@@ -13,3 +13,6 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
+    
+    mongo_host:        localhost
+    mongo_database:    pami

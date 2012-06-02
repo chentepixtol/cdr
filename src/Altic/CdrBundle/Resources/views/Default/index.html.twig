@@ -1,0 +1,35 @@
+<form method="POST" action="">
+
+DESDE: <input type="text" name="start_date" id="start_date" />
+HASTA: <input type="text" name="end_date" id="end_date" />
+<input type="submit" value="Filtrar" />
+
+</form>
+
+
+{% if records %}
+<table>
+   <thead>
+       <th>Fecha</th>
+       <th>Unique ID</th>
+       <th>Caller ID</th>
+       <th>Source</th>
+       <th>Destino</th>
+       <th>Segundos</th>
+       <th>Status</th>
+   </thead>
+   <tbody>
+   {% for record in records %}
+   <tr>
+       <td>{{ record.starttime }}</td>
+       <td>{{ record.uniqueid }}</td>
+       <td>{{ record.callerid }}</td>
+       <td>{{ record.source }}</td>
+       <td>{{ record.destination }}</td>
+       <td>{{ record.billableseconds }}</td>
+       <td>{{ record.disposition }}</td>
+   </tr>
+   {% endfor %}
+   </tbody>
+</table>
+{% endif %}
