@@ -11,9 +11,23 @@ class DefaultController extends Controller
         $request = $this->getRequest();
         $records = array();
         if( $request->isMethod("POST")){
-            $records = $this->getMongoCdr()->getCollection()->find();
+            $filter = array();
+            $startDate = $request->request->get('start_date');
+            $endDate = $request->request->get('end_date');
+
+            if( $startDate ){
+                $filter = array_merge($filter, array('starttime' => array('$gte' => $startDate)));
+            }
+            if( $endDate ){
+                $filter = array_merge($filter, array('starttime' => array('$lte' => $endDate)));
+            }
+            if( $startDate  && $endDate ){
+                $filter = array_merge($filter, array('starttime' => array('$gte' => $startDate, '$lte' => $endDate)));
+            }
+
+            $records = $this->getMongoCdr()->getCollection()->find($filter);
         }
-        return $this->render('AlticCdrBundle:Default:index.html.twig', array('records' => $records));
+        return $this->render('AlticCdrBundle:Default:index.html.twig', array('records' => $records, 'params' => $request->request->all()));
     }
 
     /**
