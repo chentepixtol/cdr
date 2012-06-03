@@ -1,3 +1,15 @@
+
+{% extends '::base.html.twig' %}
+
+{% block javascripts %}
+{% javascripts
+    '@AlticCdrBundle/Resources/public/js/*'
+%}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}
+
+{% block body  %}
 <form method="POST" action="">
 
     Desde: <input type="text" name="start_date" id="start_date" value="{{ params.start_date }}" />
@@ -10,5 +22,13 @@
     </select>
 
     <input type="submit" value="Filtrar" />
-
 </form>
+
+    {% if chart %}
+
+       {{ fc(chart.buildXml(), asset('bundles/alticcdr/fc/Column2D.swf')) }}
+
+    {% endif %}
+
+
+{% endblock %}

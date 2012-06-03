@@ -19,19 +19,11 @@
             <argument type="service" id="altic_cdr.mongo_db" />
         </service>
         
-    </services>
-
-    <!--
-    <parameters>
-        <parameter key="altic_cdr.example.class">Altic\CdrBundle\Example</parameter>
-    </parameters>
-
-    <services>
-        <service id="altic_cdr.example" class="%altic_cdr.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="twig.extension.altic.util" class="Altic\CdrBundle\Twig\Extension\UtilExtension" public="false">
+            <tag name="twig.extension" />
+            <argument type="service" id="twig.loader" />
         </service>
+        
     </services>
-    -->
+
 </container>

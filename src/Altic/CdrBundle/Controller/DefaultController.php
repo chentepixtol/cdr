@@ -2,6 +2,8 @@
 
 namespace Altic\CdrBundle\Controller;
 
+use FChandy\Chart;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
@@ -46,12 +48,14 @@ class DefaultController extends Controller
             $field = $params->get('field');
 
             $result = $this->getMongoCdr()->getCountByField($field);
-            echo "<pre>";print_r($result);die();
 
+            $chart = new Chart("Comportamiento", $field, 'numero de llamadas');
+            foreach ($result as $label => $value){
+                $chart->addSet($value, $label);
+            }
         }
 
-
-        return $this->render('AlticCdrBundle:Default:single.html.twig', array());
+        return $this->render('AlticCdrBundle:Default:single.html.twig', compact('chart'));
     }
 
     /**
@@ -67,11 +71,28 @@ class DefaultController extends Controller
             $fieldTwo = $params->get('fieldTwo');
 
             $result = $this->getMongoCdr()->getCountByFields($field, $fieldTwo);
-            echo "<pre>";print_r($result);die();
+            $chart = new Chart("Comportamiento", "$field vs $fieldTwo", 'numero de llamadas');
+            $seriesNames = $categories = array();
+            foreach( $result as $labelOne => $data ){
+                $categories[$labelOne] = 1;
+                foreach( $data as $labelTwo => $value ){
+                    if( !isset($seriesNames[$labelTwo]) ){
+                        $seriesNames[$labelTwo] = array($value);
+                    }else{
+                        $seriesNames[$labelTwo][] = $value;
+                    }
+                }
+            }
+            foreach (array_keys($categories) as $category){
+                $chart->addCategory($category);
+            }
+            foreach ($seriesNames as $serieName => $values){
+                $chart->addDataset($serieName, $values);
+            }
 
         }
 
-        return $this->render('AlticCdrBundle:Default:multiple.html.twig', array());
+        return $this->render('AlticCdrBundle:Default:multiple.html.twig', compact('chart'));
     }
 
 
