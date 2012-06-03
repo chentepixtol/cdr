@@ -1,10 +1,4 @@
-<form method="POST" action="">
-
-DESDE: <input type="text" name="start_date" id="start_date" value="{{ params.start_date }}" />
-HASTA: <input type="text" name="end_date" id="end_date" value="{{ params.end_date }}" />
-<input type="submit" value="Filtrar" />
-
-</form>
+{% include 'AlticCdrBundle:Default:filter.html.twig' %}
 
 
 {% if records %}

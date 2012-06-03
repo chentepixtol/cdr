@@ -4,7 +4,18 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="AlticCdrBundle_homepage" pattern="/cdr">
+    <route id="AlticCdrBundle_homepage" pattern="/">
         <default key="_controller">AlticCdrBundle:Default:index</default>
     </route>
+    
+    <route id="AlticCdrBundle_single_chart" pattern="/single-chart">
+        <default key="_controller">AlticCdrBundle:Default:singleSeriesChart</default>
+    </route>
+    
+    
+    <route id="AlticCdrBundle_multi_chart" pattern="/multi-chart">
+        <default key="_controller">AlticCdrBundle:Default:multipleSeriesChart</default>
+    </route>
+    
+    
 </routes>

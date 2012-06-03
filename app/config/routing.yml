@@ -1,6 +1,6 @@
 AlticCdrBundle:
     resource: "@AlticCdrBundle/Resources/config/routing.xml"
-    prefix:   /
+    prefix:   /cdr
 
 # Internal routing configuration to handle ESI
 #_internal:
