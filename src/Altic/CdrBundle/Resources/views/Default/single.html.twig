@@ -1,27 +1,47 @@
-
 {% extends '::base.html.twig' %}
 
 {% block javascripts %}
-{% javascripts
-    '@AlticCdrBundle/Resources/public/js/*'
-%}
-<script src="{{ asset_url }}"></script>
+   {{ parent() }}
+{% javascripts '@AlticCdrBundle/Resources/public/js/*' %}
+   <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
 {% endblock %}
 
 {% block body  %}
-<form method="POST" action="">
+<form method="POST" action="" class="form-horizontal">
+    <fieldset>
 
-    Desde: <input type="text" name="start_date" id="start_date" value="{{ params.start_date }}" />
-    Hasta: <input type="text" name="end_date" id="end_date" value="{{ params.end_date }}" />
+        <div class="control-group">
+            <label class="control-label">Fecha Inicial</label>
+            <div class="controls">
+                <input class="span3" type="text" name="start_date" id="start_date" value="{{ params.start_date }}" />
+            </div>
+        </div>
 
-    <select name="field" id="field">
-        <option value="disposition">Status</option>
-        <option value="source">Source</option>
-        <option value="destination">Destination</option>
-    </select>
+        <div class="control-group">
+            <label class="control-label">Fecha Final</label>
+            <div class="controls">
+                <input class="span3" type="text" name="end_date" id="end_date" value="{{ params.end_date }}" />
+            </div>
+        </div>
 
-    <input type="submit" value="Filtrar" />
+        <div class="control-group">
+            <label class="control-label">Campo</label>
+            <div class="controls">
+                <select name="field" id="field" class="span3">
+                    <option value="disposition">Status</option>
+                    <option value="source">Source</option>
+                    <option value="destination">Destination</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary"><i class="icon-ok">Filtrar</i></button>
+        </div>
+
+    </fieldset>
+
 </form>
 
     {% if chart %}
