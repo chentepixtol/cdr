@@ -1,8 +1,8 @@
 web/bundles/
 web/.sass-cache/
-web/css/*
 app/bootstrap.php.cache
 app/cache/*
+web/css/*.css
 app/logs/*
 build/
 vendor
